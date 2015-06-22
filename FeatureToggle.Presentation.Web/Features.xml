@@ -1,0 +1,22 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <FeatureFiles Include="$(OutputPath)\FeatureToggle.Lib.*.dll" />
+    <FeatureFile Include="$(MSBuildStartupDirectory)\FeatureToggle.Libraries\FeatureToggle.Lib.Services\FeatureToggle.Lib.Services.dll" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'ClientOne'" Label="Client With Friendly Welcome">
+    <FeatureFile Include="$(MSBuildStartupDirectory)\FeatureToggle.Libraries\FeatureToggle.Lib.WelcomeService.Friendly\FeatureToggle.Lib.WelcomeService.Friendly.dll" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'ClientTwo'" Label="Client With Professional Welcome">
+    <FeatureFile Include="$(MSBuildStartupDirectory)\FeatureToggle.Libraries\FeatureToggle.Lib.WelcomeService.Professional\FeatureToggle.Lib.WelcomeService.Professional.dll" />
+  </ItemGroup>
+
+  <Target Name="CleanFeaturesLibraries">
+    <Delete
+      Files="@(FeatureFiles)" />  
+  </Target>
+  <Target Name="ResolveFeaturesLibraries">
+    <Copy
+      SourceFiles="@(FeatureFile)"
+      DestinationFiles="@(FeatureFile->'$(OutputPath)\%(Filename)%(Extension)')" />
+  </Target>
+</Project>

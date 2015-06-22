@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    @if (ViewBag.IsContentServiceActive)
+    {
+        <h1>@ViewBag.Title</h1>
+        <h3>@ViewBag.ExtraContent</h3>
+    }
+    else
+    {
+        <h2>No welcome service!</h2>
+    }
+
+    <br />
+    <br />
+    <br />
+    <h4>@Html.Raw(ViewBag.Adv)</h4>
+    <h5>@ViewBag.Copyright</h5>
+</body>
+</html>
